@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Trivia Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <div id="start-screen" class="screen">
+            <h1>Trivia Challenge</h1>
+            <button id="start-btn">Start Quiz</button>
+        </div>
+
+        <div id="quiz-screen" class="screen hide">
+            <div class="quiz-header">
+                <div id="progress">Question 1/10</div>
+                <div id="timer">Time Left: <span id="time-left">15</span>s</div>
+            </div>
+            <h2 id="question-text">Loading question...</h2>
+            <div id="choices-container" class="choices-grid"></div>
+            <button id="next-btn" class="hide">Next Question</button>
+        </div>
+
+        <div id="end-screen" class="screen hide">
+            <h2>Quiz Completed!</h2>
+            <p id="final-score">You scored 0 out of 0</p>
+            <button id="restart-btn">Play Again</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
