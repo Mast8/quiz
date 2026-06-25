@@ -72,6 +72,13 @@ function showQuestion() {
     progressText.innerText = `Question ${currentQuestionIndex + 1}/${questions.length}`;
     questionText.innerText = currentQuestion.question;
 
+    // fix last question button
+    if (currentQuestionIndex === questions.length - 1) {
+        nextBtn.innerText = "Finish Quiz";
+    } else {
+        nextBtn.innerText = "Next Question";
+    }
+
     // Generate option buttons
     currentQuestion.choices.forEach(choice => {
         const button = document.createElement('button');
@@ -153,6 +160,7 @@ nextBtn.addEventListener('click', () => {
         showEndScreen();
     }
 });
+
 
 function showEndScreen() {
     quizScreen.classList.add('hide');
