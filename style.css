@@ -1,0 +1,87 @@
+:root {
+    --primary: #4a90e2;
+    --success: #2ec4b6;
+    --danger: #e71d36;
+    --dark: #22252a;
+    --light: #f4f7f6;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light);
+    color: var(--dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.quiz-container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 550px;
+}
+
+.screen {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.hide { display: none !important; }
+
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    color: #666;
+}
+
+.choices-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 2px solid var(--primary);
+    background: white;
+    color: var(--primary);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background: var(--primary);
+    color: white;
+}
+
+#start-btn, #next-btn, #restart-btn {
+    background: var(--primary);
+    color: white;
+}
+
+/* Dynamic State Classes */
+.correct {
+    background-color: var(--success) !important;
+    color: white !important;
+    border-color: var(--success) !important;
+}
+
+.wrong {
+    background-color: var(--danger) !important;
+    color: white !important;
+    border-color: var(--danger) !important;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+}
