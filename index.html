@@ -8,14 +8,37 @@
 </head>
 <body>
     <div class="quiz-container">
+
         <div id="start-screen" class="screen">
             <h1>Trivia Challenge</h1>
+            
+            <div class="settings-group">
+                <label for="category-select">Category:</label>
+                <select id="category-select">
+                    <option value="">Any Category</option>
+                    <option value="9">General Knowledge</option>
+                    <option value="21">Sports</option>
+                    <option value="22">Geography</option>
+                    <option value="23">History</option>
+                </select>
+            </div>
+
+            <div class="settings-group">
+                <label for="difficulty-select">Difficulty:</label>
+                <select id="difficulty-select">
+                    <option value="">Any Difficulty</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+
             <button id="start-btn">Start Quiz</button>
         </div>
 
         <div id="quiz-screen" class="screen hide">
             <div class="quiz-header">
-                <div id="progress">Question 1/10</div>
+                <div id="progress">Question 1/5</div>
                 <div id="timer">Time Left: <span id="time-left">15</span>s</div>
             </div>
             <h2 id="question-text">Loading question...</h2>
@@ -28,6 +51,7 @@
             <p id="final-score">You scored 0 out of 0</p>
             <button id="restart-btn">Play Again</button>
         </div>
+
     </div>
 
     <script src="script.js"></script>

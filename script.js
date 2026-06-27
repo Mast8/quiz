@@ -19,6 +19,10 @@ const progressText = document.getElementById('progress');
 const timeLeftText = document.getElementById('time-left');
 const finalScoreText = document.getElementById('final-score');
 
+// Category & Difficulty Selectors
+const categorySelect = document.getElementById('category-select');
+const difficultySelect = document.getElementById('difficulty-select');
+
 // Helper: Decode HTML entities from API data (e.g., &quot; -> ")
 function decodeHtml(html) {
     const txt = document.createElement("textarea");
@@ -28,11 +32,25 @@ function decodeHtml(html) {
 
 // 1. Fetch questions from API
 async function fetchQuestions() {
+    // Visual feedback: Prevent multiple accidental clicks while fetching
+    startBtn.innerText = "Loading...";
+    startBtn.disabled = true;
+    restartBtn.innerText = "Loading...";
+    restartBtn.disabled = true;
+
     try {
-        // Fetches 5 multiple-choice general knowledge questions
-        const response = await fetch('https://opentdb.com/api.php?amount=5&type=multiple');
+        const category = categorySelect.value ? `&category=${categorySelect.value}` : '';
+        const difficulty = difficultySelect.value ? `&difficulty=${difficultySelect.value}` : '';
+
+        const url = `https://opentdb.com/api.php?amount=5&type=multiple${category}${difficulty}`;
+        const response = await fetch(url);
         const data = await response.json();
         
+        // Safety check if the API returns an error token or empty results
+        if (data.response_code !== 0) {
+            throw new Error("No questions found for this combination.");
+        }
+
         // Transform data into a cleaner structure
         questions = data.results.map(q => {
             const formattedQuestion = {
@@ -48,13 +66,25 @@ async function fetchQuestions() {
 
         startQuiz();
     } catch (error) {
-        questionText.innerText = "Failed to load questions. Please try again.";
+        // Reset buttons if fetching fails
+        startBtn.innerText = "Start Quiz";
+        startBtn.disabled = false;
+        restartBtn.innerText = "Play Again";
+        restartBtn.disabled = false;
+
+        alert("Failed to load questions. Try changing your difficulty or category settings!");
         console.error(error);
     }
 }
 
 // 2. Start Quiz Logic
 function startQuiz() {
+    // Reset button states back to normal
+    startBtn.innerText = "Start Quiz";
+    startBtn.disabled = false;
+    restartBtn.innerText = "Play Again";
+    restartBtn.disabled = false;
+
     startScreen.classList.add('hide');
     endScreen.classList.add('hide');
     quizScreen.classList.remove('hide');
@@ -72,7 +102,7 @@ function showQuestion() {
     progressText.innerText = `Question ${currentQuestionIndex + 1}/${questions.length}`;
     questionText.innerText = currentQuestion.question;
 
-    // fix last question button
+    // Fix last question button text
     if (currentQuestionIndex === questions.length - 1) {
         nextBtn.innerText = "Finish Quiz";
     } else {
@@ -116,7 +146,6 @@ function selectAnswer(selectedButton, correctAnswer) {
         score++;
     } else {
         selectedButton.classList.add('wrong');
-        // Highlight the right answer for feedback
         revealCorrectAnswer(correctAnswer);
     }
 
@@ -160,7 +189,6 @@ nextBtn.addEventListener('click', () => {
         showEndScreen();
     }
 });
-
 
 function showEndScreen() {
     quizScreen.classList.add('hide');
