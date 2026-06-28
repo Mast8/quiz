@@ -17,6 +17,61 @@ body {
     margin: 0;
 }
 
+/* Container for each settings row */
+.settings-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Styling the labels */
+.settings-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333333;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Styling the select dropdowns */
+.settings-group select {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 16px;
+    color: #4a4a4a;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    
+    /* Removes default native styling for a cleaner look */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+    /* Custom dropdown arrow */
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234a4a4a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px; /* Make room for the arrow */
+}
+
+/* Focus state for better accessibility */
+.settings-group select:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+/* Optional: Slight hover effect */
+.settings-group select:hover {
+    border-color: #a8a8a8;
+}
+
 .quiz-container {
     background: white;
     padding: 30px;
